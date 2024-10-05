@@ -1,6 +1,6 @@
 import React from "react";
 import Dropzone from "react-dropzone-uploader";
-import "react-dropzone-uploader/dist/styles.css";
+// import "react-dropzone-uploader/dist/styles.css";
 
 const ImageUpload = ({ formData, setFormData }) => {
   const handleChangeStatus = ({ meta, file }, status) => {
