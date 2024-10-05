@@ -1,0 +1,150 @@
+/* src/styles/Sidebar.css */
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 320px;
+    height: 97%;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    border-radius: 10px;
+    margin: 20px;
+    flex-direction: column;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+}
+
+.close-sidebar {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: #ffffff;
+    position: absolute;
+}
+
+.sidebar-content {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.sidebar-image {
+    width: 100%;
+    object-fit: cover;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.sidebar-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.sidebar-rating-value {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 4px;
+    color: #333;
+}
+
+.sidebar-rating-stars {
+    color: #ffa500;
+    font-size: 18px;
+}
+
+.sidebar-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+    flex-direction: column;
+    font-size: small;
+}
+
+.sidebar-info-label {
+    font-weight: bold;
+    color: #666;
+}
+
+.sidebar-info-value {
+    color: #333;
+    text-align: right;
+}
+
+.sidebar-info a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.sidebar-info a:hover {
+    text-decoration: underline;
+}
+
+.edit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 2px;
+    height: 25px;
+    width: 140px;
+    border: none;
+    background: #ece0d1;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.edi-lable {
+    line-height: 22px;
+    font-size: 19px;
+    color: black;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.edit-button:hover {
+    background: #e2d7c8;
+}
+
+.edit-button:hover .svg-icon {
+    animation: lr 1s linear infinite;
+}
+
+@keyframes lr {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-1px);
+    }
+
+    75% {
+        transform: translateX(1px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
