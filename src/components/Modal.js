@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ImageUpload from "./ImageUpload";
+// import ImageUpload from "./ImageUpload";
 import { toast } from "react-toast";
 
 const Modal = ({ isOpen, onClose, onSubmit, OriginalformData }) => {
@@ -223,7 +223,7 @@ const Modal = ({ isOpen, onClose, onSubmit, OriginalformData }) => {
           ></textarea>
 
           <label htmlFor="image">Image URL:</label>
-          <ImageUpload formData={formData} setFormData={setFormData} />
+          {/* <ImageUpload formData={formData} setFormData={setFormData} /> */}
 
           <div className="button_container">
             <a
