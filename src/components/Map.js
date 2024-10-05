@@ -35,7 +35,9 @@ const Map = ({ onMarkerClick }) => {
   useEffect(() => {
     const fetchCoffeeShops = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/geojson");
+        const response = await axios.get(
+          "https://tlv-coffee-map-backend.vercel.app/geojson"
+        );
         setCoffeeShops(response.data.features);
       } catch (error) {
         console.error("Error fetching GeoJSON data:", error);
