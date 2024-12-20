@@ -104,7 +104,7 @@ const Header = ({ onAdd, onThemeChange }) => {
           </svg>
         </span>
       </button>
-      <h1>TLV Coffee Map</h1>
+      <h1>Favorite Coffee Shops Map</h1>
     </div>
   );
 };

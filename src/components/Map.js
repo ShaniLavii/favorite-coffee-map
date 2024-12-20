@@ -58,7 +58,7 @@ const DynamicTileLayer = ({ isDarkMode }) => {
 const Map = ({ onMarkerClick, isDarkMode }) => {
   const [coffeeShops, setCoffeeShops] = useState([]);
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(null);
-  const [tooltipOpen, setTooltipOpen] = useState(null);
+  const [hoveredMarkerIndex, setHoveredMarkerIndex] = useState(null); // Track hovered marker
 
   useEffect(() => {
     const fetchCoffeeShops = async () => {
@@ -87,15 +87,14 @@ const Map = ({ onMarkerClick, isDarkMode }) => {
 
     // Set the active marker index
     setActiveMarkerIndex(index);
-
-    // Close the tooltip when a marker is clicked
-    setTooltipOpen(null);
   };
 
   const handlePopupClose = () => {
     // Reset active marker index when popup is closed
     setActiveMarkerIndex(null);
   };
+
+  console.log(hoveredMarkerIndex);
 
   return (
     <MapContainer center={[32.0628645, 34.776885]} zoom={13} className="map">
@@ -111,16 +110,18 @@ const Map = ({ onMarkerClick, isDarkMode }) => {
           icon={index === activeMarkerIndex ? activeIcon : regularIcon}
           eventHandlers={{
             click: (e) => handleMarkerClick(shop, index, e.target._map),
-            mouseover: (e) => setTooltipOpen(index), // Show tooltip on hover
-            mouseout: () => setTooltipOpen(null), // Hide tooltip when hover ends
+            mouseover: () => setHoveredMarkerIndex(index), // Show tooltip on hover
+            mouseout: () => setHoveredMarkerIndex(null), // Hide tooltip when hover ends
           }}
         >
-          {/* Conditionally show tooltip based on hover or active state */}
-          {tooltipOpen === index && (
-            <Tooltip direction="top" offset={[0, -32]} permanent={false}>
-              <span>{shop.properties.name}</span>
-            </Tooltip>
-          )}
+          {/* Conditionally show tooltip based on hover */}
+          <Tooltip
+            direction="top"
+            offset={[0, -32]}
+            visible={hoveredMarkerIndex === index}
+          >
+            <span>{shop.properties.name}</span>
+          </Tooltip>
           <Popup onClose={handlePopupClose}>
             <h2>{shop.properties.name}</h2>
             <p>{shop.properties.description}</p>
