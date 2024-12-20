@@ -13,7 +13,7 @@ export const submitCoffeeShopRequest = async (
 
     // Send the complete data (including formData, emailBody, and featureId) to the backend API
     const response = await fetch(
-      "http://localhost:3000/api/submit-coffeeshop-request",
+      "https://tlv-coffee-map-backend.vercel.app/api/submit-coffeeshop-request",
       {
         method: "POST",
         headers: {
@@ -64,9 +64,9 @@ const createEmailBody = (formData, originalData, featureId) => {
     
     ${changeSummary}
 
-    Accept: (http://localhost:3000/api/accept-request?id=${featureId}&type=${
+    Accept: (https://tlv-coffee-map-backend.vercel.app/api/accept-request?id=${featureId}&type=${
     originalData ? "edit" : "new"
   })
-    Reject: (http://localhost:3000/api/reject-request?id=${featureId})
+    Reject: (https://tlv-coffee-map-backend.vercel.app/api/reject-request?id=${featureId})
   `;
 };
