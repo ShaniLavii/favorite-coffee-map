@@ -69,7 +69,11 @@ const App = () => {
     }
 
     // Submit the request
-    await submitCoffeeShopRequest(data);
+    await submitCoffeeShopRequest(
+      data,
+      selectedFeature?.properties,
+      selectedFeature?.properties?.id
+    );
     setLastSubmissionTime(currentTime); // Update last submission time
   };
 

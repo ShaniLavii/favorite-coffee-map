@@ -1,11 +1,17 @@
 import { toast } from "react-toast"; // Import toast for notifications
 
-export const submitCoffeeShopRequest = async (formData, originalData) => {
+export const submitCoffeeShopRequest = async (
+  formData,
+  originalData,
+  featureId
+) => {
   try {
     // Prepare the email body
-    const emailBody = createEmailBody(formData, originalData);
+    const emailBody = createEmailBody(formData, originalData, featureId);
+    console.log(emailBody); // Log the email body for debugging
+    console.log(featureId);
 
-    // Send formData and emailBody to backend API
+    // Send the complete data (including formData, emailBody, and featureId) to the backend API
     const response = await fetch(
       "http://localhost:3000/api/submit-coffeeshop-request",
       {
@@ -13,7 +19,7 @@ export const submitCoffeeShopRequest = async (formData, originalData) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ formData, emailBody }), // Send both form data and email body
+        body: JSON.stringify({ emailBody, featureId }), // Send all necessary data
       }
     );
 
@@ -30,7 +36,7 @@ export const submitCoffeeShopRequest = async (formData, originalData) => {
 };
 
 // Function to create the email body with submitted data and differences
-const createEmailBody = (formData, originalData) => {
+const createEmailBody = (formData, originalData, featureId) => {
   const changes = Object.keys(formData).reduce((acc, key) => {
     if (originalData && originalData[key] !== formData[key]) {
       acc.push(`${key}: ${originalData[key]} -> ${formData[key]}`);
@@ -58,11 +64,9 @@ const createEmailBody = (formData, originalData) => {
     
     ${changeSummary}
 
-    Accept: [Accept Link](http://localhost:3000/api/accept-request?id=${
-      formData.id
-    }&type=${originalData ? "edit" : "new"})
-    Reject: [Reject Link](http://localhost:3000/api/reject-request?id=${
-      formData.id
-    })
+    Accept: (http://localhost:3000/api/accept-request?id=${featureId}&type=${
+    originalData ? "edit" : "new"
+  })
+    Reject: (http://localhost:3000/api/reject-request?id=${featureId})
   `;
 };
