@@ -67,7 +67,7 @@ const Sidebar = ({ feature, onClose, handleOpenModal, setFormData }) => {
               {feature.properties.description || "No description available."}
             </span>
           </div>
-          {/* <button className="edit-button" onClick={edit}>
+          <button className="edit-button" onClick={edit}>
             <svg
               className="svg-icon"
               fill="none"
@@ -86,7 +86,7 @@ const Sidebar = ({ feature, onClose, handleOpenModal, setFormData }) => {
               </g>
             </svg>
             <span className="edit-lable">Request to Edit</span>
-          </button> */}
+          </button>
         </div>
       </div>
     </div>

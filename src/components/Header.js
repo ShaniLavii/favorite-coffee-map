@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Header = ({ onAdd }) => {
+const Header = ({ onAdd, onThemeChange }) => {
+  // Handler to toggle dark mode
+  const handleThemeToggle = (event) => {
+    const isDarkMode = event.target.checked;
+    onThemeChange(isDarkMode);
+  };
+
+  useEffect(() => {
+    // Check for saved theme preference in localStorage (optional)
+    const isDarkMode = localStorage.getItem("theme") === "dark";
+    const themeToggleInput = document.getElementById("themeToggle");
+
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      themeToggleInput.checked = true;
+    }
+
+    // Add event listener
+    themeToggleInput.addEventListener("change", handleThemeToggle);
+
+    // Cleanup listener on component unmount
+    return () => {
+      themeToggleInput.removeEventListener("change", handleThemeToggle);
+    };
+  }, []);
+
   return (
     <div id="header">
-      {/* <label
+      <label
         htmlFor="themeToggle"
         className="themeToggle st-sunMoonThemeToggleBtn"
       >
@@ -55,8 +80,8 @@ const Header = ({ onAdd }) => {
             ></circle>
           </g>
         </svg>
-      </label> */}
-      {/* <button className="add" id="add-coffee-shop" onClick={onAdd}>
+      </label>
+      <button className="add" id="add-coffee-shop" onClick={onAdd}>
         <span data-text-initial="Add Coffee Shop" className="tooltip"></span>
         <span>
           <svg
@@ -78,7 +103,7 @@ const Header = ({ onAdd }) => {
             </g>
           </svg>
         </span>
-      </button> */}
+      </button>
       <h1>TLV Coffee Map</h1>
     </div>
   );

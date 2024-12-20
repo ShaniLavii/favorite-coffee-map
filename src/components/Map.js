@@ -1,6 +1,12 @@
-// src/components/Map.js
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Tooltip,
+  useMap,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import axios from "axios";
@@ -13,21 +19,43 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
 });
 
+// Regular size icon for non-active markers
 const regularIcon = new L.Icon({
-  iconUrl: "/static/images/icons/coffee-cup.png",
+  iconUrl: "/static/images/icons/map-icon.png",
   iconSize: [32, 32], // Regular size
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
 
+// Larger size icon for active markers
 const activeIcon = new L.Icon({
-  iconUrl: "/static/images/icons/coffee-cup.png",
+  iconUrl: "/static/images/icons/map-icon.png",
   iconSize: [48, 48], // Larger size for selected marker
   iconAnchor: [24, 48],
   popupAnchor: [0, -48],
 });
 
-const Map = ({ onMarkerClick }) => {
+// TileLayer component that dynamically changes based on dark mode
+const DynamicTileLayer = ({ isDarkMode }) => {
+  const map = useMap(); // Get access to the map instance
+
+  const tileLayerUrl = isDarkMode
+    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+    : "https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}";
+
+  useEffect(() => {
+    // When the isDarkMode changes, update the tile layer URL
+    map.eachLayer((layer) => {
+      if (layer instanceof L.TileLayer) {
+        layer.setUrl(tileLayerUrl);
+      }
+    });
+  }, [isDarkMode, map]);
+
+  return <TileLayer url={tileLayerUrl} />;
+};
+
+const Map = ({ onMarkerClick, isDarkMode }) => {
   const [coffeeShops, setCoffeeShops] = useState([]);
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(null);
   const [tooltipOpen, setTooltipOpen] = useState(null);
@@ -60,7 +88,7 @@ const Map = ({ onMarkerClick }) => {
     // Set the active marker index
     setActiveMarkerIndex(index);
 
-    // Close the tooltip
+    // Close the tooltip when a marker is clicked
     setTooltipOpen(null);
   };
 
@@ -71,10 +99,8 @@ const Map = ({ onMarkerClick }) => {
 
   return (
     <MapContainer center={[32.0628645, 34.776885]} zoom={13} className="map">
-      <TileLayer
-        url="https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
+      {/* Use the DynamicTileLayer to update the tile layer based on dark mode */}
+      <DynamicTileLayer isDarkMode={isDarkMode} />
       {coffeeShops.map((shop, index) => (
         <Marker
           key={index}
@@ -85,12 +111,20 @@ const Map = ({ onMarkerClick }) => {
           icon={index === activeMarkerIndex ? activeIcon : regularIcon}
           eventHandlers={{
             click: (e) => handleMarkerClick(shop, index, e.target._map),
+            mouseover: (e) => setTooltipOpen(index), // Show tooltip on hover
+            mouseout: () => setTooltipOpen(null), // Hide tooltip when hover ends
           }}
         >
-          {/* Show tooltip only on hover */}
-          <Tooltip direction="top" offset={[0, -32]} permanent={false}>
-            <span>{shop.properties.name}</span>
-          </Tooltip>
+          {/* Conditionally show tooltip based on hover or active state */}
+          {tooltipOpen === index && (
+            <Tooltip direction="top" offset={[0, -32]} permanent={false}>
+              <span>{shop.properties.name}</span>
+            </Tooltip>
+          )}
+          <Popup onClose={handlePopupClose}>
+            <h2>{shop.properties.name}</h2>
+            <p>{shop.properties.description}</p>
+          </Popup>
         </Marker>
       ))}
     </MapContainer>

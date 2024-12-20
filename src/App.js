@@ -15,6 +15,7 @@ const App = () => {
   const [originalFormData, setOriginalFormData] = useState({}); // Store the initial data
   const [isChanged, setIsChanged] = useState(false); // Track if changes were made
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0); // Track last submission time
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleEditClick = () => {
     setModalOpen(true);
@@ -32,6 +33,7 @@ const App = () => {
 
   const handleAddClick = () => {
     setModalOpen(true);
+    setSelectedFeature(null); // Clear selected feature
     setFormData({});
     setOriginalFormData({}); // Reset original form data for adding a new item
     setIsChanged(false);
@@ -49,7 +51,7 @@ const App = () => {
     const currentTime = Date.now();
 
     // Check if submission is allowed based on time
-    if (currentTime - lastSubmissionTime < 60000) {
+    if (currentTime - lastSubmissionTime < 30000) {
       toast.error("You can only submit a request once per minute.");
       return;
     }
@@ -79,12 +81,31 @@ const App = () => {
     setIsChanged(isFormDataChanged);
   }, [formData, originalFormData]);
 
+  useEffect(() => {
+    // Check for saved theme preference in localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.body.classList.add("dark-mode");
+    } else {
+      setIsDarkMode(false);
+      document.body.classList.remove("dark-mode");
+    }
+  }, []);
+
+  const handleThemeChange = (isDark) => {
+    // Update the theme in localStorage and the body class
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    document.body.classList.toggle("dark-mode", isDark);
+    setIsDarkMode(isDark);
+  };
+
   return (
     <div className="App">
       <ToastContainer position="top-right" delay={6000} />
 
-      <Header onAdd={handleAddClick} />
-      <Map onMarkerClick={handleMarkerClick} />
+      <Header onAdd={handleAddClick} onThemeChange={handleThemeChange} />
+      <Map onMarkerClick={handleMarkerClick} isDarkMode={isDarkMode} />
       <Popup feature={selectedFeature} onClose={handlePopupClose} />
       <Modal
         isOpen={isModalOpen}

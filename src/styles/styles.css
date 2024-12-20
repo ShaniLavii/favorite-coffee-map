@@ -145,6 +145,14 @@ form textarea {
     margin-bottom: 10px;
 }
 
+form input[type="text"],
+input[type="url"],
+form textarea {
+    border-radius: 5px;
+    padding: 6px;
+    border: 1px solid #967259;
+}
+
 form a {
     bottom: 10px;
 }
@@ -177,6 +185,14 @@ form a {
 
 body.dark-mode .modal_content {
     background-color: #313131;
+}
+
+body.dark-mode form input[type="text"],
+body.dark-mode input[type="url"], 
+body.dark-mode form textarea {
+    background: #4e4e4e;
+    color: white;
+    border: none;
 }
 
 .close {
@@ -214,9 +230,9 @@ body.dark-mode a:visited {
     color: #e6ceb7;
 }
 
-body.dark-mode a {
+/* body.dark-mode a {
     color: white;
-}
+} */
 
 
 
@@ -579,6 +595,10 @@ body.dark-mode a {
     color: #000;
 }
 
+body.dark-mode .price-label {
+    color: white;
+}
+
 .checkbox-wrapper-46 {
     /* margin-top: 5px; */
     margin-bottom: 15px;
@@ -683,6 +703,9 @@ body.dark-mode a {
     margin-bottom: 8px;
 }
 
+body.dark-mode .modal-title {
+    color: white;
+}
 
 /* From Uiverse.io by Philibert-JF */
 .type--A {

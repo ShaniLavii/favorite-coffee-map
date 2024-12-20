@@ -148,3 +148,38 @@
         transform: translateX(0);
     }
 }
+
+/* Dark Mode Styles */
+body.dark-mode .sidebar {
+    background: #333;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .close {
+    color: #bbb;
+}
+
+body.dark-mode .sidebar-title {
+    color: #f0f0f0;
+}
+
+body.dark-mode .sidebar-rating-value,
+body.dark-mode .sidebar-rating-stars {
+    color: #f0f0f0;
+}
+
+body.dark-mode .sidebar-info-label {
+    color: #ccc;
+}
+
+body.dark-mode .sidebar-info-value {
+    color: #f0f0f0;
+}
+
+body.dark-mode .sidebar-info a {
+    color: #8ab4f8;
+}
+
+body.dark-mode .sidebar-info a:hover {
+    color: #ffffff;
+}

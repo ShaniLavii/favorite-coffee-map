@@ -7,7 +7,7 @@ export const submitCoffeeShopRequest = async (formData, originalData) => {
 
     // Send formData and emailBody to backend API
     const response = await fetch(
-      "http://localhost:3001/api/submit-coffeeshop-request",
+      "http://localhost:3000/api/submit-coffeeshop-request",
       {
         method: "POST",
         headers: {
@@ -58,10 +58,10 @@ const createEmailBody = (formData, originalData) => {
     
     ${changeSummary}
 
-    Accept: [Accept Link](http://localhost:3001/api/accept-request?id=${
+    Accept: [Accept Link](http://localhost:3000/api/accept-request?id=${
       formData.id
     }&type=${originalData ? "edit" : "new"})
-    Reject: [Reject Link](http://localhost:3001/api/reject-request?id=${
+    Reject: [Reject Link](http://localhost:3000/api/reject-request?id=${
       formData.id
     })
   `;
