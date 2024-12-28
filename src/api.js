@@ -6,28 +6,28 @@ export const submitCoffeeShopRequest = async (
   featureId
 ) => {
   try {
-    // Prepare the email body
-    const emailBody = createEmailBody(formData, originalData, featureId);
-    console.log(emailBody); // Log the email body for debugging
-    console.log(featureId);
+    // Prepare the JSON payload
+    const payload = createRequestPayload(formData, originalData, featureId);
 
-    // Send the complete data (including formData, emailBody, and featureId) to the backend API
+    // Send the complete data (including formData, originalData, changes, and featureId) to the backend API
     const response = await fetch(
+      // "http://localhost:3000/api/submit-coffeeshop-request",
       "https://tlv-coffee-map-backend.vercel.app/api/submit-coffeeshop-request",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ emailBody, featureId }), // Send all necessary data
+        body: JSON.stringify(payload), // Send structured JSON
       }
     );
 
     if (response.ok) {
       toast.success("Your request has been submitted and is pending approval.");
     } else {
+      const errorData = await response.json();
       toast.error(
-        "There was an issue with submitting your request. Please try again."
+        `There was an issue submitting your request: ${errorData.error}`
       );
     }
   } catch (error) {
@@ -35,38 +35,22 @@ export const submitCoffeeShopRequest = async (
   }
 };
 
-// Function to create the email body with submitted data and differences
-const createEmailBody = (formData, originalData, featureId) => {
+// Function to create the JSON payload for the backend
+const createRequestPayload = (formData, originalData, featureId) => {
   const changes = Object.keys(formData).reduce((acc, key) => {
     if (originalData && originalData[key] !== formData[key]) {
-      acc.push(`${key}: ${originalData[key]} -> ${formData[key]}`);
+      acc[key] = {
+        original: originalData[key],
+        updated: formData[key],
+      };
     }
     return acc;
-  }, []);
+  }, {});
 
-  const changeSummary =
-    changes.length > 0 ? `Changes:\n${changes.join("\n")}` : "No changes made.";
-
-  console.log(formData);
-  console.log(changeSummary);
-
-  return `
-    Submitted Data:
-    Name: ${formData.name}
-    Address: ${formData.address}
-    Website: ${formData.website}
-    Price Range: ${formData.price_range}
-    Rating: ${formData.rating}
-    Inside Sitting: ${formData.inside_sitting}
-    Outside Sitting: ${formData.outside_sitting}
-    Description: ${formData.description}
-    Image: ${formData.image}
-    
-    ${changeSummary}
-
-    Accept: (https://tlv-coffee-map-backend.vercel.app/api/accept-request?id=${featureId}&type=${
-    originalData ? "edit" : "new"
-  })
-    Reject: (https://tlv-coffee-map-backend.vercel.app/api/reject-request?id=${featureId})
-  `;
+  return {
+    formData, // Submitted data
+    originalData, // Original data (for reference)
+    featureId, // Unique identifier
+    changes, // Changes summary
+  };
 };
