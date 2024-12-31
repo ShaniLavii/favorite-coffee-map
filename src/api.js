@@ -12,7 +12,7 @@ export const submitCoffeeShopRequest = async (
     // Send the complete data (including formData, originalData, changes, and featureId) to the backend API
     const response = await fetch(
       // "http://localhost:3000/api/submit-coffeeshop-request",
-      "https://coffee-map-backend.vercel.app/api/submit-coffeeshop-request",
+      `${process.env.REACT_APP_BE_HOST}/api/submit-coffeeshop-request`,
       {
         method: "POST",
         headers: {
