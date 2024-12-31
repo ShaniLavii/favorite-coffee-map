@@ -64,7 +64,7 @@ const Map = ({ onMarkerClick, isDarkMode }) => {
     const fetchCoffeeShops = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BE_HOST}/geojson`
+          `https://coffee-map-backend.vercel.app/geojson`
         );
         setCoffeeShops(response.data.features);
       } catch (error) {

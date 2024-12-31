@@ -30,7 +30,7 @@ const ConfirmationHandler = () => {
         try {
           //   const response = await fetch(`http://localhost:3000/${endpoint}`, {
           const response = await fetch(
-            `${process.env.REACT_APP_BE_HOST}/${endpoint}`,
+            `https://coffee-map-backend.vercel.app/${endpoint}`,
             {
               method: "POST",
               headers: {
