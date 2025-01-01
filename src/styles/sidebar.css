@@ -19,15 +19,24 @@
         font-style: normal;
 }
 
+.sidebar-relative-container {
+    position: relative;
+}
+
 .close-sidebar {
     align-self: flex-end;
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
-    margin-bottom: 20px;
     color: #ffffff;
-    position: absolute;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px;
+    justify-content: flex-end;
+    display: flex;
+    width: 100%;
 }
 
 .sidebar-content {
@@ -35,11 +44,15 @@
     display: flex;
     padding: 20px;
     flex-direction: column;
+    position: relative;
+    top: -60px;
 }
 
 .sidebar-image {
     width: 100%;
     object-fit: cover;
+    position: relative;
+    top: -50px;
 }
 
 .sidebar-title {
