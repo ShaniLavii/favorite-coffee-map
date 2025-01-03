@@ -23,20 +23,22 @@
     position: relative;
 }
 
+.button-container {
+    justify-content: flex-end;
+    display: flex;
+    width: 100%;
+    position: sticky;
+    z-index: 100;
+    top: 0;
+}
+
 .close-sidebar {
-    align-self: flex-end;
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
     color: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     padding: 10px;
-    justify-content: flex-end;
-    display: flex;
-    width: 100%;
 }
 
 .sidebar-content {

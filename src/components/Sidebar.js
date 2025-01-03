@@ -16,9 +16,11 @@ const Sidebar = ({ feature, onClose, handleOpenModal, setFormData }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-relative-container">
-        <button className="close-sidebar" onClick={onClose}>
-          &times;
-        </button>
+        <div className="button-container">
+          <button className="close-sidebar" onClick={onClose}>
+            &times;
+          </button>
+        </div>
         {feature.properties.image && (
           <img
             src={feature.properties.image}

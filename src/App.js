@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toast"; // Importing only ToastContainer
 import { submitCoffeeShopRequest } from "./api"; // Import your API function
 import { toast } from "react-toast"; // Import toast for notifications
 import ConfirmationHandler from "./components/ConfirmationHandler"; // Import the new component
+import axios from "axios";
 
 const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -17,6 +18,7 @@ const App = () => {
   const [isChanged, setIsChanged] = useState(false);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [coffeeShops, setCoffeeShops] = useState([]);
 
   const handleEditClick = () => {
     setModalOpen(true);
@@ -26,6 +28,10 @@ const App = () => {
   const handleMarkerClick = (feature) => setSelectedFeature(feature);
   const handlePopupClose = () => setSelectedFeature(null);
   const handleSidebarClose = () => setSelectedFeature(null);
+  const handleSearchSelect = (shop) => {
+    // TODO: close the search bar
+    setSelectedFeature(shop);
+  };
 
   const handleModalClose = () => {
     setModalOpen(false);
@@ -97,12 +103,36 @@ const App = () => {
     setIsDarkMode(isDark);
   };
 
+  useEffect(() => {
+    const fetchCoffeeShops = async () => {
+      try {
+        const response = await axios.get(
+          `https://coffee-map-backend.vercel.app/geojson`
+        );
+        setCoffeeShops(response.data.features);
+      } catch (error) {
+        console.error("Error fetching GeoJSON data:", error);
+      }
+    };
+
+    fetchCoffeeShops();
+  }, []);
+
   return (
     <div className="App">
       <ToastContainer position="top-right" delay={6000} />
       <ConfirmationHandler /> {/* Add the new component */}
-      <Header onAdd={handleAddClick} onThemeChange={handleThemeChange} />
-      <Map onMarkerClick={handleMarkerClick} isDarkMode={isDarkMode} />
+      <Header
+        coffeeShops={coffeeShops}
+        handleSearchSelect={handleSearchSelect}
+        onAdd={handleAddClick}
+        onThemeChange={handleThemeChange}
+      />
+      <Map
+        coffeeShops={coffeeShops}
+        onMarkerClick={handleMarkerClick}
+        isDarkMode={isDarkMode}
+      />
       <Popup feature={selectedFeature} onClose={handlePopupClose} />
       <Modal
         isOpen={isModalOpen}

@@ -254,6 +254,7 @@ body.dark-mode a:visited {
 .st-sunMoonThemeToggleBtn {
     position: relative;
     cursor: pointer;
+    top: 0;
 }
 
 .st-sunMoonThemeToggleBtn .themeToggleInput {
@@ -362,6 +363,7 @@ body.dark-mode a:visited {
 }
 
 .add {
+    top: 15px;
     box-sizing: border-box;
     width: var(--button-diameter);
     height: var(--button-diameter);
@@ -372,7 +374,6 @@ body.dark-mode a:visited {
     cursor: pointer;
     position: absolute;
     outline: none;
-    top: 40px;
     left: 55px;
 }
 
@@ -1038,4 +1039,178 @@ body.dark-mode .modal-title {
     z-index: 9999;
     font-family: "Quicksand",
         sans-serif;
+}
+
+/* Light mode styles */
+.search-bar {
+    top: -10px;
+    position: absolute;
+    right: 20px;
+    font-family: "Quicksand", sans-serif;
+}
+
+.search-bar-input {
+    width: 250px;
+    padding: 5px;
+}
+
+.dropdown {
+    position: absolute;
+    z-index: 999;
+    text-align: left;
+    padding-left: 0;
+    max-height: 236px;
+    overflow-y: auto;
+    margin-top: 2px;
+    width: 100%;
+}
+
+.dropdown li {
+    border: 1px solid #895b30;
+    padding: 5px;
+    font-size: small;
+    border-radius: 5px;
+    background: #ffffff;
+    margin-bottom: 1px;
+    width: 95%;
+    list-style: none;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label {
+    position: relative;
+    font-family: "Quicksand", sans-serif;
+    display: block;
+    width: 250px;
+    display: flex;
+    border-radius: 6px;
+    border: 1px solid #895b30;
+    padding: 7px 1px 7px 9px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.icon {
+    position: absolute;
+    top: 53%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    color: #c5c5c5;
+}
+
+.input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #967259;
+    font-size: 16px;
+    font-family: "Quicksand", sans-serif;
+}
+
+.input::placeholder {
+    color: #895b30;
+    font-family: "Quicksand", sans-serif;
+}
+
+/* Dark mode styles */
+body.dark-mode .search-bar {
+    top: -10px;
+    position: absolute;
+    right: 20px;
+    font-family: "Quicksand", sans-serif;
+}
+
+body.dark-mode .search-bar-input {
+    width: 250px;
+    padding: 5px;
+    background-color: #2c2c2c;
+    /* Dark background for input */
+    color: #e1e1e1;
+    /* Light text color for input */
+    border: 1px solid #444;
+    /* Dark border color */
+}
+
+body.dark-mode .dropdown {
+    position: absolute;
+    z-index: 999;
+    text-align: left;
+    padding-left: 0;
+    max-height: 236px;
+    overflow-y: auto;
+    margin-top: 2px;
+    width: 100%;
+    color: #e1e1e1;
+}
+
+body.dark-mode .dropdown li {
+    border: 1px solid #000000;
+    padding: 5px;
+    font-size: small;
+    border-radius: 5px;
+    background: #3b3b3b;
+    margin-bottom: 1px;
+    width: 95%;
+    list-style: none;
+    cursor: pointer;
+}
+
+body.dark-mode .dropdown li:hover {
+    background-color: #555;
+}
+
+body.dark-mode .label {
+    position: relative;
+    font-family: "Quicksand", sans-serif;
+    display: block;
+    width: 250px;
+    display: flex;
+    border-radius: 6px;
+    border: 1px solid #444;
+    /* Dark border */
+    padding: 7px 1px 7px 9px;
+    text-align: left;
+    margin-bottom: 25px;
+    background-color: #2c2c2c;
+    /* Dark background for the label */
+}
+
+body.dark-mode .icon {
+    position: absolute;
+    top: 53%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    color: #ccc;
+    /* Light icon color */
+}
+
+body.dark-mode .input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #e1e1e1;
+    /* Light text color */
+    font-size: 16px;
+    font-family: "Quicksand", sans-serif;
+}
+
+body.dark-mode .input::placeholder {
+    color: #aaa;
+    /* Lighter placeholder color for dark mode */
+    font-family: "Quicksand", sans-serif;
 }

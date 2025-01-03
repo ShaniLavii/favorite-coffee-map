@@ -55,25 +55,25 @@ const DynamicTileLayer = ({ isDarkMode }) => {
   return <TileLayer url={tileLayerUrl} />;
 };
 
-const Map = ({ onMarkerClick, isDarkMode }) => {
-  const [coffeeShops, setCoffeeShops] = useState([]);
+const Map = ({ coffeeShops, onMarkerClick, isDarkMode }) => {
+  // const [coffeeShops, setCoffeeShops] = useState([]);
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(null);
   const [hoveredMarkerIndex, setHoveredMarkerIndex] = useState(null); // Track hovered marker
 
-  useEffect(() => {
-    const fetchCoffeeShops = async () => {
-      try {
-        const response = await axios.get(
-          `https://coffee-map-backend.vercel.app/geojson`
-        );
-        setCoffeeShops(response.data.features);
-      } catch (error) {
-        console.error("Error fetching GeoJSON data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCoffeeShops = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://coffee-map-backend.vercel.app/geojson`
+  //       );
+  //       setCoffeeShops(response.data.features);
+  //     } catch (error) {
+  //       console.error("Error fetching GeoJSON data:", error);
+  //     }
+  //   };
 
-    fetchCoffeeShops();
-  }, []);
+  //   fetchCoffeeShops();
+  // }, []);
 
   const handleMarkerClick = (shop, index, map) => {
     // Trigger the parent component's click handler
