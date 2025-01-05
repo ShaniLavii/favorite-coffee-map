@@ -1214,3 +1214,20 @@ body.dark-mode .input::placeholder {
     /* Lighter placeholder color for dark mode */
     font-family: "Quicksand", sans-serif;
 }
+
+.clear-btn {
+    background: none;
+    /* border: none; */
+    cursor: pointer;
+    margin-left: 5px;
+    color: rgba(137, 91, 48, 0.6);
+    border-radius: 50%;
+    border-color: transparent;
+    font-size: 10px;
+    transition: color 0.2s ease;
+}
+
+.clear-btn:hover {
+    color: rgba(137, 91, 48, 1);
+    /* Darker color on hover */
+}

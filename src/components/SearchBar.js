@@ -8,10 +8,8 @@ const SearchBar = ({ coffeeShops, onSelectShop }) => {
     const value = e.target.value;
     setSearchTerm(value);
 
-    // Filter coffee shops based on the search term
     if (value.trim()) {
       const filtered = coffeeShops.filter((shop) => {
-        // Convert all property values to strings and check for a match
         return Object.values(shop.properties).some((property) =>
           property.toString().toLowerCase().includes(value.toLowerCase())
         );
@@ -20,6 +18,11 @@ const SearchBar = ({ coffeeShops, onSelectShop }) => {
     } else {
       setFilteredShops([]);
     }
+  };
+
+  const handleClearSearch = () => {
+    setSearchTerm("");
+    setFilteredShops([]);
   };
 
   const handleShopSelect = (shop) => {
@@ -59,12 +62,17 @@ const SearchBar = ({ coffeeShops, onSelectShop }) => {
           value={searchTerm}
           onChange={handleSearchChange}
         />
+        {searchTerm && (
+          <button className="clear-btn" onClick={handleClearSearch}>
+            ✕
+          </button>
+        )}
       </label>
       {filteredShops.length > 0 && (
         <ul className="dropdown">
           {filteredShops.map((shop) => (
             <li key={shop.properties.id} onClick={() => handleShopSelect(shop)}>
-              {shop.properties.name}
+              {shop.properties.name} ({shop.properties.address})
             </li>
           ))}
         </ul>

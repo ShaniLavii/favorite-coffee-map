@@ -19,22 +19,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
 });
 
-// Regular size icon for non-active markers
-const regularIcon = new L.Icon({
-  iconUrl: "/static/images/icons/map-icon.png",
-  iconSize: [32, 32], // Regular size
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
-
-// Larger size icon for active markers
-const activeIcon = new L.Icon({
-  iconUrl: "/static/images/icons/map-icon.png",
-  iconSize: [48, 48], // Larger size for selected marker
-  iconAnchor: [24, 48],
-  popupAnchor: [0, -48],
-});
-
 // TileLayer component that dynamically changes based on dark mode
 const DynamicTileLayer = ({ isDarkMode }) => {
   const map = useMap(); // Get access to the map instance
@@ -60,20 +44,24 @@ const Map = ({ coffeeShops, onMarkerClick, isDarkMode }) => {
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(null);
   const [hoveredMarkerIndex, setHoveredMarkerIndex] = useState(null); // Track hovered marker
 
-  // useEffect(() => {
-  //   const fetchCoffeeShops = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://coffee-map-backend.vercel.app/geojson`
-  //       );
-  //       setCoffeeShops(response.data.features);
-  //     } catch (error) {
-  //       console.error("Error fetching GeoJSON data:", error);
-  //     }
-  //   };
+  const regularIcon = new L.Icon({
+    iconUrl: isDarkMode
+      ? "/static/images/icons/map-icon-darkmode.png" // Dark mode icon
+      : "/static/images/icons/map-icon.png", // Light mode icon
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
 
-  //   fetchCoffeeShops();
-  // }, []);
+  // Larger size icon for active markers (light and dark modes)
+  const activeIcon = new L.Icon({
+    iconUrl: isDarkMode
+      ? "/static/images/icons/map-icon-darkmode.png" // Dark mode icon
+      : "/static/images/icons/map-icon.png", // Light mode icon
+    iconSize: [48, 48],
+    iconAnchor: [24, 48],
+    popupAnchor: [0, -48],
+  });
 
   const handleMarkerClick = (shop, index, map) => {
     // Trigger the parent component's click handler
