@@ -222,7 +222,7 @@ const Modal = ({ isOpen, onClose, onSubmit, OriginalformData }) => {
             onChange={handleChange}
           ></textarea>
 
-          <label htmlFor="image">Image URL:</label>
+          {/* <label htmlFor="image">Image URL:</label> */}
           {/* <ImageUpload formData={formData} setFormData={setFormData} /> */}
 
           <div className="button_container">

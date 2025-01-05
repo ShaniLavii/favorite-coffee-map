@@ -1231,3 +1231,7 @@ body.dark-mode .input::placeholder {
     color: rgba(137, 91, 48, 1);
     /* Darker color on hover */
 }
+
+textarea {
+    height: 100px;
+}

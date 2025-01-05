@@ -36,7 +36,12 @@ const DynamicTileLayer = ({ isDarkMode }) => {
     });
   }, [isDarkMode, map]);
 
-  return <TileLayer url={tileLayerUrl} />;
+  return (
+    <TileLayer
+      url={tileLayerUrl}
+      attribution="&copy; <a href='https://github.com/ShaniLavii/favorite-coffee-map' target='_blank'>Source | Github </a>&copy; <a href='https://github.com/ShaniLavii' target='_blank'>Shani Lavi | Github </a> &copy; <a href='https://www.linkedin.com/in/shani-lavi-a74b3a259/' target='_blank'>Shani Lavi | Linkedin </a>"
+    />
+  );
 };
 
 const Map = ({ coffeeShops, onMarkerClick, isDarkMode }) => {
@@ -85,7 +90,12 @@ const Map = ({ coffeeShops, onMarkerClick, isDarkMode }) => {
   console.log(hoveredMarkerIndex);
 
   return (
-    <MapContainer center={[32.0628645, 34.776885]} zoom={13} className="map">
+    <MapContainer
+      center={[32.0628645, 34.776885]}
+      zoom={13}
+      className="map"
+      attributionControl={true}
+    >
       {/* Use the DynamicTileLayer to update the tile layer based on dark mode */}
       <DynamicTileLayer isDarkMode={isDarkMode} />
       {coffeeShops.map((shop, index) => (

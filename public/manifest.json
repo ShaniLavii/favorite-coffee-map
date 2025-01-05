@@ -1,6 +1,6 @@
 {
-  "short_name": "TLV Coffee Map",
-  "name": "Mapping The Best Coffee Shops In Tel-Aviv",
+  "short_name": "Favorite Coffee Map",
+  "name": "Mapping The Best Coffee Shops In Israel (center area)",
   "icons": [
     {
       "src": "static/images/icons/latte.png",
