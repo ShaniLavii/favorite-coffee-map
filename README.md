@@ -1,38 +1,141 @@
-# Create React App
+# Coffee Shops Map
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+This is an open-source React application that displays coffee shop locations on an interactive map. The app uses **Leaflet** for map rendering and dynamic functionality, such as toggling between light and dark modes, displaying markers, and zooming into specific locations. The frontend is hosted on **Vercel**, while the backend (not part of this repository) is built using **Flask** and also hosted on Vercel.
 
-## Deploy Your Own
+---
 
-Deploy your own Create React App project with Vercel.
+## Features
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
+- Interactive map with customizable tile layers (light/dark mode).
+- Dynamic markers for coffee shops, complete with hover tooltips and popups.
+- Smooth zooming to markers on click.
+- Mobile-friendly and responsive design.
 
-_Live Example: https://create-react-template.vercel.app/_
+---
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+### Frontend
 
-### `npm start`
+- **React** (with hooks)
+- **React-Leaflet** for map rendering
+- **Leaflet** for map interaction
+- **Axios** for API communication
+- **Vercel** for deployment
 
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend (not included in this repository)
 
-The page will reload when you make changes. You may also see any lint errors in the console.
+- **Flask** (API for fetching coffee shop data and submitting requests)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation and Setup
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.
+Make sure you have the following installed:
 
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-<!-- Next Steps:
-- Build authentication mechanism
-- re-enable Add & Edit functionality
-- only allow authenticated users to submit new and edit requests
-- re-enable dark-mode toggle once functionality is enabled
- -->
+### Clone the Repository
+
+```bash
+git clone https://github.com/ShaniLavii/favorite-coffee-map.git
+cd favorite-coffee-map
+```
+
+### Install Dependencies
+
+Using npm:
+
+```bash
+npm install
+```
+
+Or using yarn:
+
+```bash
+yarn install
+```
+
+### Environment Variables
+
+Create a `.env` file in the root directory and add the following variables:
+
+```env
+SKIP_PREFLIGHT_CHECK=true
+REACT_APP_BE_HOST=https://your-coffee-map-backend.vercel.app
+```
+
+### Start the Development Server
+
+Run the following command to start the local development server:
+
+```bash
+npm start
+```
+
+Or:
+
+```bash
+yarn start
+```
+
+The app will be available at `http://localhost:3000`.
+
+---
+
+## Deployment
+
+### Vercel
+
+1. Create a Vercel account if you don't already have one.
+2. Connect the repository to your Vercel project.
+3. Add the environment variables from your `.env` file to the Vercel dashboard.
+4. Deploy the app with a single click.
+
+---
+
+## Folder Structure
+
+```
+.
+├── public
+│   ├── static
+│   │   |── images
+│   │   |   ├── apple
+│   │   |   ├── coffeeshops
+│   │   |   └── icons
+│   │   └── styles
+│   ├── index.html
+├── src
+│   ├── components
+│   ├── api.js
+│   ├── App.js
+│   ├── index.js
+│   └── styles
+│       |── styles.css
+│       └── sidebar.css
+├── .env
+├── package.json
+└── README.md
+```
+
+---
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+---
+
+## Issues and Feedback
+
+If you encounter any issues or have suggestions, please feel free to open an [issue](https://github.com/ShaniLavii/coffee-shops-map/issues) in the repository.
