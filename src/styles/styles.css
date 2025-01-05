@@ -1235,3 +1235,34 @@ body.dark-mode .input::placeholder {
 textarea {
     height: 100px;
 }
+
+/* Custom Attribution Styles for Dark Mode */
+.leaflet-control-attribution {
+    background-color: #333;
+    /* Dark background */
+    color: #ddd;
+    /* Light text color */
+    font-size: 14px;
+    /* Adjust text size */
+}
+
+.leaflet-control-attribution .attribution-link {
+    color: #68503f;
+    /* Light link color */
+    text-decoration: none;
+}
+
+.leaflet-control-attribution .attribution-link:hover {
+    color: #a9a9a9;
+    /* Change color on hover */
+}
+
+/* Adjust for light mode if needed */
+body.dark-mode .leaflet-control-attribution {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode .leaflet-control-attribution .attribution-link {
+    color: #000;
+}

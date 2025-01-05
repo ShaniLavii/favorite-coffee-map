@@ -39,7 +39,7 @@ const DynamicTileLayer = ({ isDarkMode }) => {
   return (
     <TileLayer
       url={tileLayerUrl}
-      attribution="&copy; <a href='https://github.com/ShaniLavii/favorite-coffee-map' target='_blank'>Source | Github </a>&copy; <a href='https://github.com/ShaniLavii' target='_blank'>Shani Lavi | Github </a> &copy; <a href='https://www.linkedin.com/in/shani-lavi-a74b3a259/' target='_blank'>Shani Lavi | Linkedin </a>"
+      attribution="&copy; <a class='attribution-link' href='https://github.com/ShaniLavii/favorite-coffee-map' target='_blank'>Source | Github </a>&copy; <a class='attribution-link' href='https://github.com/ShaniLavii' target='_blank'>Shani Lavi | Github </a> &copy; <a class='attribution-link' href='https://www.linkedin.com/in/shani-lavi-a74b3a259/' target='_blank'>Shani Lavi | Linkedin </a>"
     />
   );
 };
